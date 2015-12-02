@@ -1,0 +1,11 @@
+1、接口说明-调用过程           
+string key = @"test/a.jpg";                         //云端key            
+string upLoadfileDir = @"E:\workspace\cccc.jpg";    //上传文件路径            
+string downLoadfileDir = @"C:\eeee\1234.jpg";       //下载文件保存路径
+            
+          
+var u = UFile.Instance;            
+bool b1=u.UploadFile(key,upLoadfileDir);        //上传文件            
+bool b2=u.DownLoadFile(downLoadfileDir, key);   //下载文件            
+bool b3=u.DeleteFile(key);                      //删除文件  
+

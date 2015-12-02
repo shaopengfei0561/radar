@@ -1,0 +1,460 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (P.R.C.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\RadarUI.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.chs\\afxres.rc""          // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\RadarUI.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 RadarUI"
+FONT 9, "宋体"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "RadarUI 1.0 版",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "版权所有 (C) 2011",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "确定",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_RADARUI_DIALOG DIALOGEX 0, 0, 320, 200
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "激光雷达3D扫描系统"
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "连接雷达",IDC_BUTTON1,24,26,57,24
+    PUSHBUTTON      "断开连接",IDC_BUTTON2,24,64,57,24
+    PUSHBUTTON      "查看参数",IDC_BUTTON3,24,102,57,24
+    PUSHBUTTON      "原始轮廓图",IDC_BUTTON4,24,140,57,24
+    GROUPBOX        "系统运行状态提示",IDC_STATIC,93,15,210,163,BS_CENTER
+    LTEXT           "1号雷达",IDC_STATIC,121,52,39,10
+    LTEXT           "2号雷达",IDC_STATIC,122,126,36,10
+    CONTROL         "Progress1",IDC_PROGRESS1,"msctls_progress32",WS_BORDER,
+                    169,44,102,18
+    CONTROL         "Progress2",IDC_PROGRESS2,"msctls_progress32",WS_BORDER,
+                    169,119,102,18
+END
+
+IDD_PEIZHI DIALOG DISCARDABLE  0, 0, 224, 229
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "连接雷达页面"
+FONT 10, "System"
+BEGIN
+    GROUPBOX        "系统参数",IDC_STATIC,7,7,205,59
+    LTEXT           "雷达一 IP ：",IDC_STATIC,14,26,43,9
+    CONTROL         "IPAddress1",IDC_IPADDRESS,"SysIPAddress32",WS_TABSTOP,
+                    60,22,59,15
+    PUSHBUTTON      "连接",IDC_BUTTON_STARTRADAR,13,205,46,19
+    PUSHBUTTON      "退出",IDC_BUTTON2,155,205,46,19
+    EDITTEXT        IDC_SavaPath,64,157,71,16,ES_AUTOHSCROLL
+    GROUPBOX        "工作显示区",IDC_STATIC,7,69,205,71
+    LTEXT           "数据保存：",IDC_STATIC,14,160,40,12
+    LISTBOX         IDC_LIST1,13,79,196,56,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_PORT,166,20,45,15,ES_AUTOHSCROLL
+    LTEXT           "端口号 ：",IDC_STATIC,125,24,35,10
+    PUSHBUTTON      "高级参数配置",IDC_BUTTON1,154,155,51,19
+    GROUPBOX        "控制面板",IDC_STATIC,7,143,205,51
+    LTEXT           "雷达二 IP :",IDC_STATIC,14,44,44,9
+    CONTROL         "IPAddress1",IDC_IPADDRESS1,"SysIPAddress32",WS_TABSTOP,
+                    60,41,59,15
+    LTEXT           " 端口号 ：",IDC_STATIC,123,44,39,10
+    EDITTEXT        IDC_PORT1,166,40,45,15,ES_AUTOHSCROLL
+    CONTROL         "",IDC_STATIC1,"Static",SS_BLACKFRAME,219,13,1,214
+END
+
+IDD_CHAKAN DIALOG DISCARDABLE  0, 0, 529, 300
+STYLE DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "初始参数查看"
+FONT 10, "System"
+BEGIN
+    GROUPBOX        "系统参数",IDC_STATIC,14,13,499,36
+    GROUPBOX        "算法参数",IDC_STATIC,15,58,498,205
+    LTEXT           "雷达IP：",IDC_STATIC,21,31,34,12
+    CONTROL         "IPAddress1",IDC_IPADDRESS1,"SysIPAddress32",WS_TABSTOP,
+                    59,28,59,15
+    PUSHBUTTON      "确定",IDC_OK,236,266,50,18
+    LTEXT           "端口号：",IDC_STATIC,141,31,34,12
+    EDITTEXT        IDC_PORT,183,28,54,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SAVEPATH,338,28,84,14,ES_AUTOHSCROLL
+    LTEXT           "数据保存地址：",IDC_STATIC,271,28,61,12
+    RTEXT           "有效检测距离的最小值（单位：cm）",IDC_STATIC_DT_DISMIN,
+                    18,72,143,13
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_ANGLEDEVIATION,412,70,88,15,
+                    ES_AUTOHSCROLL
+    RTEXT           "目标移动角度最大偏移量（单位：度）",
+                    IDC_STATIC_DT_OFFSETMAX,255,72,151,13
+    RTEXT           "有效检测角度的最大值（单位：度）",
+                    IDC_STATIC_DT_ANGLEMAX,21,123,140,13
+    RTEXT           "重建地图周期（单位：帧）",IDC_STATIC_DT_MAPPERIOD,51,
+                    157,110,13
+    RTEXT           "建立地图时间（单位：帧）",IDC_STATIC_DT_BLGMAPTIME,50,
+                    140,111,13
+    RTEXT           "有效检测角度的最小值（单位：度）",
+                    IDC_STATIC_DT_ANGLEMIN,21,106,140,13
+    EDITTEXT        ORE_DETECT_MAXRANGE,164,88,88,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MINANGLE,164,105,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MAXANGLE,164,122,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MAPPINGTIME,164,139,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MAPPINGPREIOD,164,156,88,16,
+                    ES_AUTOHSCROLL
+    RTEXT           "相邻阶跃最大距离（单位：cm）",IDC_STATIC_DT_ADJACENT,34,
+                    191,127,13
+    RTEXT           "背景偏移量（单位：cm）",IDC_STATIC_DT_OFFSET,56,174,105,
+                    13
+    RTEXT           "目标最小宽度（单位：cm）",IDC_STATIC_DT_OBJWIDTHMIN,52,
+                    208,109,13
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_BACKGROUNDOFFSET,164,173,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_ADJACENTJUMP,164,190,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MINWIDTH,164,207,88,16,
+                    ES_AUTOHSCROLL
+    RTEXT           "目标最大步伐（单位：cm）",IDC_STATIC_DT_MAXSTEP,49,225,
+                    112,13
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MAXSTRDE,164,224,88,16,
+                    ES_AUTOHSCROLL
+    RTEXT           "融合宽度（单位：cm）",IDC_STATIC_DT_FUSHIONWIDTH,313,
+                    123,93,13
+    RTEXT           "雷达安装高度（单位：cm）",IDC_STATIC_DT_INSTALLHEIGHT,
+                    282,87,124,13
+    RTEXT           "有效检测距离的最大值（单位：cm）",IDC_STATIC_DT_VANMAX,
+                    19,89,142,13
+    RTEXT           "检测灵敏度",IDC_STATIC_DT_SENSITIVITY,335,105,67,13
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MINRANGE,165,71,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_LIDARHEIGHT,412,85,88,15,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_SENSITIVITY,412,102,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_FUSHIONWIDTH,412,121,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_FUSIONDISTANCE,412,139,88,16,
+                    ES_AUTOHSCROLL
+    RTEXT           "融合距离（单位：cm）",IDC_STATIC_DT_PASTTIME,304,141,
+                    102,13
+    RTEXT           "融合步数（单位：cm）",IDC_STATIC_DT_FUSHIONSTEP,315,231,
+                    91,13
+    RTEXT           "车辆检测融合步数（单位：帧）",
+                    IDC_STATIC_DT_THROWFUSHIONSTEP,286,159,120,13
+    RTEXT           "流量刷新周期（单位：帧）",IDC_STATIC_DT_FLOWINTERVAL,
+                    298,213,108,13
+    RTEXT           "车辆检测目标最小宽度（单位：cm）",
+                    IDC_STATIC_DT_THROWMINWIDTH,268,195,138,13
+    RTEXT           "人员检查目标最小宽度（单位：cm）",
+                    IDC_STATIC_DT_FUSIONFRAMRNUM,22,242,139,13
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_FLOWINTERVAL,412,210,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_HUMANFUSHIONFN,412,174,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MINCARWIDTH,412,193,88,15,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_FUSHIONSTEP,412,228,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_CARFUSIONFN,412,156,88,16,
+                    ES_AUTOHSCROLL
+    RTEXT           "人员检查融合步数（单位：帧）",
+                    IDC_STATIC_DT_HUMANFUSHIONFN,285,177,121,13
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MINHUMANWIDTH,164,241,88,16,
+                    ES_AUTOHSCROLL
+END
+
+IDD_DIALOG_ALG_MORE_DETECT DIALOG DISCARDABLE  0, 0, 524, 262
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "高级参数设置"
+FONT 10, "System"
+BEGIN
+    GROUPBOX        "参数设置区",IDC_STATIC,7,13,505,216
+    RTEXT           "有效检测距离的最小值（单位：cm）",IDC_STATIC_DT_DISMIN,
+                    13,27,143,13
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_ANGLEDEVIATION,406,27,88,16,
+                    ES_AUTOHSCROLL
+    RTEXT           "目标移动角度最大偏移量（单位：度）",
+                    IDC_STATIC_DT_OFFSETMAX,252,30,151,13
+    RTEXT           "有效检测角度的最大值（单位：度）",
+                    IDC_STATIC_DT_ANGLEMAX,16,78,140,13
+    RTEXT           "重建地图周期（单位：帧）",IDC_STATIC_DT_MAPPERIOD,46,
+                    112,110,13
+    RTEXT           "建立地图时间（单位：帧）",IDC_STATIC_DT_BLGMAPTIME,45,
+                    95,111,13
+    RTEXT           "有效检测角度的最小值（单位：度）",
+                    IDC_STATIC_DT_ANGLEMIN,16,61,140,13
+    EDITTEXT        ORE_DETECT_MAXRANGE,159,43,88,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MINANGLE,159,60,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MAXANGLE,159,77,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MAPPINGTIME,159,94,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MAPPINGPREIOD,159,111,88,16,
+                    ES_AUTOHSCROLL
+    RTEXT           "相邻阶跃最大距离（单位：cm）",IDC_STATIC_DT_ADJACENT,29,
+                    146,127,13
+    RTEXT           "背景偏移量（单位：cm）",IDC_STATIC_DT_OFFSET,51,129,105,
+                    13
+    RTEXT           "目标最小宽度（单位：cm）",IDC_STATIC_DT_OBJWIDTHMIN,47,
+                    163,109,13
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_BACKGROUNDOFFSET,159,128,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_ADJACENTJUMP,159,145,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MINWIDTH,159,162,88,16,
+                    ES_AUTOHSCROLL
+    RTEXT           "目标最大步伐（单位：cm）",IDC_STATIC_DT_MAXSTEP,44,180,
+                    112,13
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MAXSTRDE,159,179,88,16,
+                    ES_AUTOHSCROLL
+    RTEXT           "融合宽度（单位：cm）",IDC_STATIC_DT_FUSHIONWIDTH,307,87,
+                    93,13
+    RTEXT           "雷达安装高度（单位：cm）",IDC_STATIC_DT_INSTALLHEIGHT,
+                    276,51,124,13
+    RTEXT           "有效检测距离的最大值（单位：cm）",IDC_STATIC_DT_VANMAX,
+                    14,44,142,13
+    RTEXT           "检测灵敏度",IDC_STATIC_DT_SENSITIVITY,329,69,67,13
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MINRANGE,160,26,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_LIDARHEIGHT,406,45,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_SENSITIVITY,406,63,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_FUSHIONWIDTH,406,81,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_FUSIONDISTANCE,406,99,88,16,
+                    ES_AUTOHSCROLL
+    RTEXT           "融合距离（单位：cm）",IDC_STATIC_DT_PASTTIME,298,105,
+                    102,13
+    RTEXT           "融合步数（单位：cm）",IDC_STATIC_DT_FUSHIONSTEP,308,192,
+                    91,13
+    RTEXT           "车辆检测融合步数（单位：帧）",
+                    IDC_STATIC_DT_THROWFUSHIONSTEP,280,123,120,13
+    RTEXT           "流量刷新周期（单位：帧）",IDC_STATIC_DT_FLOWINTERVAL,
+                    292,177,108,13
+    RTEXT           "车辆检测目标最小宽度（单位：cm）",
+                    IDC_STATIC_DT_THROWMINWIDTH,262,159,138,13
+    RTEXT           "人员检查目标最小宽度（单位：cm）",
+                    IDC_STATIC_DT_FUSIONFRAMRNUM,17,197,139,13
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_FLOWINTERVAL,406,171,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_HUMANFUSHIONFN,406,135,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MINCARWIDTH,406,153,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_FUSHIONSTEP,406,189,88,16,
+                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_CARFUSIONFN,406,117,88,16,
+                    ES_AUTOHSCROLL
+    RTEXT           "人员检查融合步数（单位：帧）",
+                    IDC_STATIC_DT_HUMANFUSHIONFN,279,141,121,13
+    EDITTEXT        IDC_EDIT_ALG_MORE_DETECT_MINHUMANWIDTH,159,196,88,16,
+                    ES_AUTOHSCROLL
+    PUSHBUTTON      "确定",IDC_OK,246,238,59,15
+    PUSHBUTTON      "取消",IDC_CANNAL,329,236,59,15
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "RadarUI Microsoft 基础类应用程序\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "RadarUI\0"
+            VALUE "LegalCopyright", "版权所有 (C) 2011\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "RadarUI.EXE\0"
+            VALUE "ProductName", "RadarUI 应用程序\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_RADARUI_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 313
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 193
+    END
+
+    IDD_PEIZHI, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 220
+        TOPMARGIN, 2
+        BOTTOMMARGIN, 227
+        HORZGUIDE, 7
+    END
+
+    IDD_CHAKAN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 518
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 291
+    END
+
+    IDD_DIALOG_ALG_MORE_DETECT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 517
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 255
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ABOUTBOX            "关于 RadarUI(&A)..."
+    IDP_SOCKETS_INIT_FAILED "Windows 通信端口初始化失败。"
+END
+
+#endif    // Chinese (P.R.C.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE 4, 2
+#pragma code_page(936)
+#endif //_WIN32
+#include "res\RadarUI.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.chs\afxres.rc"          // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

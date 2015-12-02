@@ -1,0 +1,170 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: RadarUI - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating command line "rc.exe /l 0x804 /fo"Release/RadarUI.res" /d "_DEBUG" /d "_AFXDLL" "C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\RadarUI.rc"" 
+Creating temporary file "C:\Users\xiaoyugu\AppData\Local\Temp\RSP30C.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Release/" /Fp"Release/RadarUI.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgBase.cpp"
+"C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp"
+"C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\ChakDlg.cpp"
+"C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\Coordinate.cpp"
+"C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\LeuzeSocketComm.cpp"
+"C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp"
+"C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\RadarCommunicationBase.cpp"
+"C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\RadarUI.cpp"
+"C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\RadarUIDlg.cpp"
+"C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\rs232.c"
+"C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\SetParseDlg.cpp"
+"C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\YTController.cpp"
+]
+Creating command line "cl.exe @C:\Users\xiaoyugu\AppData\Local\Temp\RSP30C.tmp" 
+Creating temporary file "C:\Users\xiaoyugu\AppData\Local\Temp\RSP30D.tmp" with contents
+[
+/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /FR"Release/" /Fp"Release/RadarUI.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
+"C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\Users\xiaoyugu\AppData\Local\Temp\RSP30D.tmp" 
+Creating temporary file "C:\Users\xiaoyugu\AppData\Local\Temp\RSP30E.tmp" with contents
+[
+Ws2_32.lib SkinPPWTL.lib /nologo /subsystem:windows /incremental:yes /pdb:"Release/RadarUI.pdb" /debug /machine:I386 /out:"Release/RadarUI.exe" /pdbtype:sept 
+".\Release\AlgBase.obj"
+".\Release\AlgClassify.obj"
+".\Release\ChakDlg.obj"
+".\Release\Coordinate.obj"
+".\Release\LeuzeSocketComm.obj"
+".\Release\PeizDlg.obj"
+".\Release\RadarCommunicationBase.obj"
+".\Release\RadarUI.obj"
+".\Release\RadarUIDlg.obj"
+".\Release\rs232.obj"
+".\Release\SetParseDlg.obj"
+".\Release\StdAfx.obj"
+".\Release\YTController.obj"
+".\Release\RadarUI.res"
+]
+Creating command line "link.exe @C:\Users\xiaoyugu\AppData\Local\Temp\RSP30E.tmp"
+<h3>Output Window</h3>
+Compiling resources...
+Compiling...
+StdAfx.cpp
+Compiling...
+AlgBase.cpp
+AlgClassify.cpp
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(59) : warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(62) : warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(80) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(81) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(82) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(98) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(134) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(135) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(161) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(163) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(182) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(183) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(184) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(196) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(230) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(231) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(258) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(260) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(279) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(280) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(281) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(293) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(327) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(328) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(356) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(358) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(377) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(378) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(379) : warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(391) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(425) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(426) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(467) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(573) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\AlgClassify.cpp(590) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+ChakDlg.cpp
+Coordinate.cpp
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\Coordinate.cpp(41) : warning C4018: '<' : signed/unsigned mismatch
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\Coordinate.cpp(43) : warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\Coordinate.cpp(43) : warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+LeuzeSocketComm.cpp
+PeizDlg.cpp
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(417) : warning C4305: '=' : truncation from 'const int' to 'char'
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(417) : warning C4309: '=' : truncation of constant value
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(418) : warning C4305: '=' : truncation from 'const int' to 'char'
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(418) : warning C4309: '=' : truncation of constant value
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(419) : warning C4305: '=' : truncation from 'const int' to 'char'
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(419) : warning C4309: '=' : truncation of constant value
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(420) : warning C4305: '=' : truncation from 'const int' to 'char'
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(420) : warning C4309: '=' : truncation of constant value
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(511) : warning C4305: '=' : truncation from 'const int' to 'char'
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(511) : warning C4309: '=' : truncation of constant value
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(512) : warning C4305: '=' : truncation from 'const int' to 'char'
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(512) : warning C4309: '=' : truncation of constant value
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(513) : warning C4305: '=' : truncation from 'const int' to 'char'
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(513) : warning C4309: '=' : truncation of constant value
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(514) : warning C4305: '=' : truncation from 'const int' to 'char'
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(514) : warning C4309: '=' : truncation of constant value
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(783) : warning C4305: '=' : truncation from 'const int' to 'char'
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(783) : warning C4309: '=' : truncation of constant value
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(784) : warning C4305: '=' : truncation from 'const int' to 'char'
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(784) : warning C4309: '=' : truncation of constant value
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(785) : warning C4305: '=' : truncation from 'const int' to 'char'
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(785) : warning C4309: '=' : truncation of constant value
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(786) : warning C4305: '=' : truncation from 'const int' to 'char'
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\PeizDlg.cpp(786) : warning C4309: '=' : truncation of constant value
+RadarCommunicationBase.cpp
+RadarUI.cpp
+RadarUIDlg.cpp
+Generating Code...
+Compiling...
+rs232.c
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\rs232.c(558) : fatal error C1010: unexpected end of file while looking for precompiled header directive
+Generating Code...
+Compiling...
+SetParseDlg.cpp
+YTController.cpp
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\YTController.cpp(378) : warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\YTController.cpp(378) : warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\YTController.cpp(379) : warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+C:\vc\室内定点\ 四台雷达融合\1.0.1.15110604\YTController.cpp(379) : warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+Generating Code...
+Error executing cl.exe.
+Creating temporary file "C:\Users\xiaoyugu\AppData\Local\Temp\RSPD78D.tmp" with contents
+[
+/nologo /o"Release/RadarUI.bsc" 
+".\Release\StdAfx.sbr"
+".\Release\AlgBase.sbr"
+".\Release\AlgClassify.sbr"
+".\Release\ChakDlg.sbr"
+".\Release\Coordinate.sbr"
+".\Release\LeuzeSocketComm.sbr"
+".\Release\PeizDlg.sbr"
+".\Release\RadarCommunicationBase.sbr"
+".\Release\RadarUI.sbr"
+".\Release\RadarUIDlg.sbr"
+".\Release\rs232.sbr"
+".\Release\SetParseDlg.sbr"
+".\Release\YTController.sbr"]
+Creating command line "bscmake.exe @C:\Users\xiaoyugu\AppData\Local\Temp\RSPD78D.tmp"
+Creating browse info file...
+BSCMAKE: error BK1506 : cannot open file '.\Release\rs232.sbr': No such file or directory
+Error executing bscmake.exe.
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+RadarUI.exe - 2 error(s), 66 warning(s)
+</pre>
+</body>
+</html>
