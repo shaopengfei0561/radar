@@ -26,11 +26,18 @@ n=maxval-minval;
 filename=strcat('c:\web\resources\',num2str(toprestore(sj)*2-1+100),'.jpg');
 h_fig = figure;
 % set(h_fig,'visible','off');
-for i=1:r    
-        col=(p(i,lno)+m)/n;
-        plot3(p(i,1),-p(i,2),p(i,3),'.','Color',[col 0.17 0.88],'MarkerSize',3);
-        hold on;
-end
+%for i=1:r    
+%        col=(p(i,lno)+m)/n;
+%        plot3(p(i,1),-p(i,2),p(i,3),'.','Color',[col 0.17 0.88],'MarkerSize',3);
+%        hold on;
+%end
+x=p(:,1);
+y=-p(:,2);
+z=p(:,3);
+c=z+1;
+scatter3(x,y,z,1,c,'filled'); 
+hold on;
+
 axis equal;
 grid on;
 set(gca,'color',[0,0,0],'XColor','w','YColor','w','ZColor','w');
