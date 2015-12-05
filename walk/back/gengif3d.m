@@ -11,9 +11,9 @@ function varargout = genGif3D1(recordgif, fname, h_in)
 
 [az,el] = view;
 degreeStep = 30;
-fname = ['c:\web\resources\' fname '.gif'];
+fname = [fname '.gif'];
 hFig=figure(h_in);
-set(hFig,'renderer','openGL')
+set(hFig,'renderer','opengl')
 opengl software;
 set(h_in,'Visible','off');
 set(gca,'NextPlot','replaceChildren');
@@ -21,11 +21,12 @@ if recordgif
   for i=0:degreeStep:360
     view(az+i,el);
     set(gcf, 'InvertHardCopy', 'off'); 
-    fname2 = ['temp1_' num2str(i) '.jpg'];
-    saveas(h_in,fname2,'jpg');
+    fname2 = ['temp1_' num2str(i) '.png'];
+    A=getframe(gcf);                                     
+    imwrite(A.cdata,fname2) 
   end
   for i=degreeStep:degreeStep:360
-    fname2 = ['temp1_' num2str(i) '.jpg'];
+    fname2 = ['temp1_' num2str(i) '.png'];
     %[I, map] = imread(fname2);
     im=imread(fname2);%制作gif文件，图像必须是index索引图像
     [I,map]=rgb2ind(im,20);
@@ -35,6 +36,6 @@ if recordgif
       imwrite(I,map,fname,'gif','WriteMode','append','DelayTime',0.5);
     end;
   end
-  delete('temp1_*.jpg');
+  delete('temp1_*.png');
 end
 close(h_in);
