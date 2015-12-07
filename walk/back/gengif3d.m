@@ -11,7 +11,7 @@ function varargout = genGif3D1(recordgif, fname, h_in)
 
 [az,el] = view;
 degreeStep = 30;
-fname = [fname '.gif'];
+fname = ['c:\web\resources\' fname '.gif'];
 hFig=figure(h_in);
 set(hFig,'renderer','opengl')
 opengl software;
