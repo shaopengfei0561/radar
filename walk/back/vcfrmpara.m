@@ -16,12 +16,14 @@ switch data(5)
     case 2                                                                 % VC服务器发来的开始算法处理命令数据帧                                                                
           send_data(data,4);                                               % 向VC服务器发送应答
           disp('收到VC服务器发来的开始算法处理命令数据帧......');
-          stop(ListenTimer);          
+          stop(ListenTimer);  
+          tic;
           for sj=1:toprenum
               %按照库位号下载相应数据
               fname=strcat(num2str(toprestore(sj)),'.txt');
               ftpget(fname,f);
           end 
+          toc;
           disp('数据下载完成......');
           % 表面重建
           % modified by YZJ start...

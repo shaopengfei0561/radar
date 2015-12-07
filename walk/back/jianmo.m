@@ -42,10 +42,12 @@ fname=strcat('c:\web\resources\',num2str(toprestore(sj)*2),'.jpg');
 % fname=strcat('d:\radar\output\',num2str(toprestore(sj)*2),'.jpg');
 view([-120 30]);
 saveas(h_fig, fname);
+disp('genGif3D');
+tic;
 
 genGif3D(1,num2str(toprestore(sj)*2),h_fig); % 生成GIF动画
 %close(h_fig);               %关闭figure，清空内存
-
+toc;
 if(showEnable)
   axes(handles1.axes3);
   trisurf(t,p(:,1),p(:,2),p(:,3),'facecolor','c','edgecolor','b'); %plot della superficie trattata
