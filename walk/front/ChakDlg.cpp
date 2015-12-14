@@ -50,7 +50,7 @@ BOOL CChakDlg::OnInitDialog()
 		// TODO: Add extra initialization here
 	   SetDlgItemText(IDC_IPADDRESS1,"10.13.13.165");	
 	   SetDlgItemText(IDC_PORT,"3003");
-	   SetDlgItemText(IDC_SAVEPATH,"D:\\Radar\\data.txt");
+	   SetDlgItemText(IDC_SAVEPATH,"c:\\Radar.zip");
 	   SetDlgItemText(IDC_EDIT_ALG_MORE_DETECT_MINRANGE,"1234");
 	   SetDlgItemText(ORE_DETECT_MAXRANGE,"50");
 	   SetDlgItemText(IDC_EDIT_ALG_MORE_DETECT_MINANGLE,"50");

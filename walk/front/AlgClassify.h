@@ -54,7 +54,7 @@ namespace alg_classify
 		int bldmapPeriod;	  //创建地图周期（分钟）
 		int lmsValue;		  //野点剔除阈值
 		int stepValue;		  //渐进步长
-		float railspeed;		  //渐进步长
+		float railspeed;	  //小车移动速度
 	}ClassifyConfigInfo;
 		
 	//原始数据帧队列结构体：
@@ -84,6 +84,19 @@ namespace alg_classify
 		int width;         //目标宽度
 		unsigned int timeid;        //时间id号
 	}CurObj; 
+	
+	//坐标配准偏移量
+	typedef struct _CoordiRange
+	{
+		int MiddleMinX;
+		int MiddleMaxX;
+		int MinX[20];
+		int MaxX[20];
+		int MinY[20];
+		int MaxY[20];
+		int MinZ[20];
+		int MaxZ[20];
+	}CoordiRange; 
 
 	//注册目标
 	typedef struct _RegisterObj
@@ -131,7 +144,7 @@ namespace alg_classify
 		
 		void InternalInitial();             //内部变量初始化（除了算法配置信息）
 		int jianditu;
-		bool JudgeCrossBorder(int x,int y);
+		bool JudgeCrossBorder(int x,int y,int z);
 		long int m_Num;
 		SYSPOINT m_Vpoint[3000000];				//点云点集
 		
@@ -174,7 +187,16 @@ namespace alg_classify
 
 		RegisterObj m_RegisterObj[MAX_OBJ_NUM_CLA];   //注册目标数组
 		int m_nRegisterObjNum;                        //注册目标数目
-		int m_volume;						//流量
+		int m_volume;								  //流量
+		CoordiRange m_range;						  //坐标范围
+		double lidar1angle[20];
+		double lidar2angle[20];
+		int lidar1xcoorshift[20];
+		int lidar1ycoorshift[20];
+		int lidar1zcoorshift[20];
+		int lidar2xcoorshift[20];
+		int lidar2ycoorshift[20];
+		int lidar2zcoorshift[20];
 		//******************************************************************		
 		void InputData(SecDataFrame * pfrm);		 //将原始数据添加进数据帧队列中
 		void OutQueue(int num);						 //清出数据帧队列中的前若干帧

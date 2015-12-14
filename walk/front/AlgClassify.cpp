@@ -86,9 +86,14 @@ namespace alg_classify
 	void CAlgClassify::InternalInitial()
 	{
 		//对算法配置结构体初始化	
-		m_CfgInfo.ValidDistance=25000;	//有效距离（极坐标）
-		m_CfgInfo.stepValue=4;			//渐进步长
-		m_CfgInfo.railspeed=213.334;	//小车移动速度（mm/s）
+		m_CfgInfo.ValidDistance=GetPrivateProfileInt("ScanRange","ValidDistance",0,".\\LidarConfig.ini");	//有效距离（极坐标）
+		
+		char mstring[50]; 
+		GetPrivateProfileString("LeadRail","StepValue","",mstring,sizeof(mstring),".\\LidarConfig.ini");	//小车移动速度 mm/s
+		m_CfgInfo.stepValue = atof(mstring);																//渐进步长
+
+		GetPrivateProfileString("LeadRail","Railspeed","",mstring,sizeof(mstring),".\\LidarConfig.ini");	//小车移动速度 mm/s
+		m_CfgInfo.railspeed = atof(mstring);
 		
 		//其他变量初始化
 		m_nCurID=0;
@@ -100,6 +105,47 @@ namespace alg_classify
 		m_nRegisterObjNum=0;
 		m_FogrdPntSet.wholeNum=0;			//点云数据点数	
 		m_Num=0;
+		char c[255];
+
+		char StoreAreaQuantity = GetPrivateProfileInt("RegionCoordinate","StoreAreaQuantity",0,".\\LidarConfig.ini");
+		for (int i=0;i<StoreAreaQuantity;i++)
+		{
+			sprintf(c, "MinX%d", i);
+			m_range.MinX[i] = GetPrivateProfileInt("RegionCoordinate",c,0,".\\LidarConfig.ini");
+			sprintf(c, "MaxX%d", i);
+			m_range.MaxX[i] = GetPrivateProfileInt("RegionCoordinate",c,0,".\\LidarConfig.ini");
+			sprintf(c, "MinY%d", i);
+			m_range.MinY[i] = GetPrivateProfileInt("RegionCoordinate",c,0,".\\LidarConfig.ini");
+			sprintf(c, "MaxY%d", i);
+			m_range.MaxY[i] = GetPrivateProfileInt("RegionCoordinate",c,0,".\\LidarConfig.ini");
+			sprintf(c, "MinZ%d", i);
+			m_range.MinZ[i] = GetPrivateProfileInt("RegionCoordinate",c,0,".\\LidarConfig.ini");
+			sprintf(c, "MaxZ%d", i);
+			m_range.MaxZ[i] = GetPrivateProfileInt("RegionCoordinate",c,0,".\\LidarConfig.ini");
+			
+			char mstring[50]; 
+			sprintf(c, "Lidar1Anggle%d", i);
+			GetPrivateProfileString("RegionCoordinate",c,"",mstring,sizeof(mstring),".\\LidarConfig.ini");
+			lidar1angle[i]  = atof(mstring);
+
+			sprintf(c, "Lidar2Anggle%d", i);
+			GetPrivateProfileString("RegionCoordinate",c,"",mstring,sizeof(mstring),".\\LidarConfig.ini");
+			lidar2angle[i]  = atof(mstring);
+			
+			sprintf(c, "Lidar1Xshift%d", i);
+			lidar1xcoorshift[i]   = GetPrivateProfileInt("CoordinateTransform",c,0,".\\LidarConfig.ini");
+			sprintf(c, "Lidar1Yshift%d", i);
+			lidar1ycoorshift[i]   = GetPrivateProfileInt("CoordinateTransform",c,0,".\\LidarConfig.ini");
+			sprintf(c, "Lidar1Zshift%d", i);
+			lidar1zcoorshift[i]   = GetPrivateProfileInt("CoordinateTransform",c,0,".\\LidarConfig.ini");
+
+			sprintf(c, "Lidar2Xshift%d", i);
+			lidar2xcoorshift[i]   = GetPrivateProfileInt("CoordinateTransform",c,0,".\\LidarConfig.ini");
+			sprintf(c, "Lidar2Yshift%d", i);
+			lidar2ycoorshift[i]   = GetPrivateProfileInt("CoordinateTransform",c,0,".\\LidarConfig.ini");
+			sprintf(c, "Lidar2Zshift%d", i);
+			lidar2zcoorshift[i]   = GetPrivateProfileInt("CoordinateTransform",c,0,".\\LidarConfig.ini");
+		}		
 	}
 	
 	
@@ -214,7 +260,7 @@ namespace alg_classify
 		char s[255];
 		//存文件
 		FILE *p;	
-		sprintf(s, "D:\\test\\%d.txt", m_storeNum);
+		sprintf(s, "c:\\test\\dat.txt", m_storeNum);
 		if((p=fopen(s,"wt"))!=NULL)
 		{
 			for(i=0;i<m_Num;i++) 
@@ -224,12 +270,16 @@ namespace alg_classify
 		m_Num=0;
 		return result;
 	}
-	bool CAlgClassify::JudgeCrossBorder(int x,int z)
-	{
-		if (x>RX||x<LX) 
-		return true;
-		if (z<LZ||z>HZ) 
-		return true;
+	bool CAlgClassify::JudgeCrossBorder(int x,int y,int z)
+	{	
+		if (x>m_range.MaxX[m_storeNum-1] || x<m_range.MinX[m_storeNum-1]) 
+			return true;
+		//if (x<m_range.MiddleMaxX && x>m_range.MiddleMinX) 
+		//	return true;										//适用中间有道路的仓库
+		//if (y>m_range.MaxY[m_storeNum-1] || y<m_range.MinY[m_storeNum-1]) 
+		//	return true;
+		if (z<m_range.MinZ[m_storeNum-1] || z>m_range.MaxZ[m_storeNum-1]) 
+			return true;
 
 		return false;
 	}
@@ -244,9 +294,6 @@ namespace alg_classify
 		int startindex, disthrd, pointnum, d, stopindex, d1, d2;
 		int deltime=0;
 		double angle;
-		double lidar1angle[14]={0.1,0.2,0,0,0.2,0.5,0.7,0,0,0,0,0,1,0.2};
-		double lidar2angle[14]={0.5,0.5,0.2,0,0.2,0.4,0,0,-0.9,-0.9,0.4,0.4,0.5,0};
-		int coorshift[14]={18111,18111,18111,18111,18111,18111,18111,18111,18111,18111,18111,18111,18111,18111};
 		
 		//清空前景点空间
 		m_FogrdPntSet.pointNum=0;
@@ -263,30 +310,31 @@ namespace alg_classify
 			if (i<m_nStdDataLength*0.5)   				
 			{			
 					angle = 0.006283185307180*i-0.087964594300514+0.01745329222*lidar1angle[m_storeNum-1];
-					x[i]  = ((float)foredistance)*cos(angle);
-					y[i]  = m_nCurID*m_CfgInfo.stepValue;
-					z[i]  = 6800-((float)foredistance)*sin(angle);	
+					x[i]  = ((float)foredistance)*cos(angle)+lidar1xcoorshift[m_storeNum-1];
+					y[i]  = m_nCurID*m_CfgInfo.stepValue+lidar1ycoorshift[m_storeNum-1];
+					z[i]  = lidar1zcoorshift[m_storeNum-1]-((float)foredistance)*sin(angle);	
 			}
 			else 
 			{		
 					angle = 0.006283185307180*(i-m_nStdDataLength/2)-0.087964594300514+0.01745329222*lidar2angle[m_storeNum-1];
-					x[i]  = ((float)foredistance)*cos(angle)+coorshift[m_storeNum-1];
-					y[i]  = m_nCurID*m_CfgInfo.stepValue+100;
-					z[i]  = 6800-((float)foredistance)*sin(angle);		
+					x[i]  = ((float)foredistance)*cos(angle)+lidar2xcoorshift[m_storeNum-1];
+					y[i]  = m_nCurID*m_CfgInfo.stepValue+lidar2ycoorshift[m_storeNum-1];
+					z[i]  = lidar2zcoorshift[m_storeNum-1]-((float)foredistance)*sin(angle);;		
 			}
 			
-			if (JudgeCrossBorder(x[i],z[i]))
+			if (JudgeCrossBorder(x[i],y[i],z[i]))
 			{
 				x[i]=0;
 				y[i]=0;
 				z[i]=0;
 			}
+			
 		}
 		
 		//点云聚类
 		startindex = 1;     
-		disthrd = 400;					//点距离阈值
-		pointnum = 5;					//点间隔
+		disthrd = GetPrivateProfileInt("DataProcess","PointClusterDis",0,".\\LidarConfig.ini");					//点距离阈值
+		pointnum = GetPrivateProfileInt("DataProcess","PointNum",0,".\\LidarConfig.ini");					//点间隔
 		for (i=1;i<m_nStdDataLength/2;i++)
 		{	
 			d=CmptSpaceDistance(x[i-1],y[i-1],z[i-1],x[i],y[i],z[i]);
@@ -346,7 +394,7 @@ namespace alg_classify
 		}
 		
 		//点云滤波
-		neithrd = 200;											//相邻点距离过滤阈值（单位：mm）
+		neithrd = GetPrivateProfileInt("DataProcess","PointFilterThreshold",0,".\\LidarConfig.ini");											//相邻点距离过滤阈值（单位：mm）
 		for (i=1;i<k-1;i++)
 		{
 			d1=CmptSpaceDistance(x[i-1],y[i-1],z[i-1],x[i],y[i],z[i]);

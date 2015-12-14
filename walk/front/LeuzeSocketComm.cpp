@@ -1,8 +1,13 @@
 // LeuzeSocketComm.cpp: implementation of the CLeuzeSocketComm class.
 //
 //////////////////////////////////////////////////////////////////////
+#include <windows.h>
+#include <tchar.h>
+#include <stdio.h>
 #include "stdafx.h"
 #include "LeuzeSocketComm.h"
+#include "zip.h"
+
 //#include "PeizDlg.h"
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -38,15 +43,17 @@ void CLeuzeSocketComm::ReSetTagBuffer()
 	tagBuffer[0]=0xff;
 	tagBuffer[1]=0xff;
 	tagBuffer[2]=0xff;
-
+ 
 	tagBufferNumber=0;
 }
 int  CLeuzeSocketComm::StartRadar(int radarNo, CString SavePath,CString ip,int port)
 {       
-	CreateDirectory("D:\\Radar", NULL );//创建文件夹
+	//CreateDirectory("c:\\Radar", NULL );//创建文件夹
+	SavePath="c:\\data.txt";
 	m_pFile=fopen(SavePath,"w+");
 	if(!m_pFile)
 	return -2;
+	
 	//检查SOCKET版本
 	WORD wVersionRequested;
 	WSADATA wsaData;
@@ -347,10 +354,17 @@ bool CLeuzeSocketComm::LoadData(DataFrame *pData)
 		pData->data[k]=okData[i];
 
 		//存入文件
-			fprintf(m_pFile,"%d ",okData[i]);
+		//fprintf(m_pFile,"%d ",okData[i]);
 		
 		k++;
 	}
+
+	HZIP hz;
+	hz = CreateZip("c:\\Radar.zip", 0);//创建压缩文件
+	ZipAdd(hz ,"data.txt", "\\data.txt");
+	CloseZip(hz);
+    DeleteFile("c:\\data.txt");//删除txt文件
+
 	ClearRawData();//装载一次，就必须清空原始数据缓存
 	return true;
 }

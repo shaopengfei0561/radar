@@ -1,5 +1,5 @@
 //*******************************************************
-//版本：V1.0
+//版本：V1.2
 //中储10号库PLC控制
 //*******************************************************
 
@@ -13,10 +13,10 @@
 *Copyright? 2009, 中科院无锡物联网产业研究院 All rights reserved.
 *
 *作者			    时间					备注
-*zhaoxianzhong		2015-5-5
+*zhaoxianzhong		2015-11-10
 *
 *说明
-
+Revision:抓起点增加已过起始位置时返回
 ******************************************************************/
 // AlgClassify.h: interface for the CAlgClassify class.
 //
@@ -36,8 +36,9 @@
 
 //宏定义
 #define SLAVE_ID   0x04//PLC从站地址
-#define SCAN_RATE  500//单位ms,读取位置周期
-#define PRE_POS		300//单位mm,扫描启动距离
+#define SCAN_RATE  100//单位ms,读取位置周期
+#define POS_READ_RATE 120//单位ms，适当大于SCAN_RATE
+#define PRE_POS		600//单位mm,扫描启动距离
 #define WAIT4RSP   200//单位ms，指令应答等待时间
 #define MAX_SINGLE_SCAN_SIZE 1000//单次扫描最大仓位数
 

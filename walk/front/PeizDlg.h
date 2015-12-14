@@ -23,6 +23,7 @@ public:
 	
 	void InitStartRadar();
 	void StartRail();
+	void RestartRail();
 	void StartRadar();
     int MaxValue(int a,int b);
 	int MinValue(int a,int b);
@@ -35,6 +36,7 @@ public:
 	bool LoadData(RailDataFrame *pData);
 	void ClearRawData();
 	bool CheckSum();
+	void WriteLog(const char* format, ... );
 	unsigned char CheckFrmSum(char buf[9]);
 	std::vector <unsigned char> m_rawDataBuff;
 	// Dialog Data
@@ -76,7 +78,8 @@ private:
 	CTime m_CurTime;	//当前日期、时间
 	CString m_strCurTime;	//当前日期、时间的字符串变量
 	int m_nInsertPos;		//列表框中的待插入位置
-
+	char revflag;
+	char resendnum;
     unsigned long  FitNum;
 	unsigned long  LoadDataNum;
 	unsigned long  LoadDataNum1;

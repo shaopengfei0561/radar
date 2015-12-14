@@ -146,6 +146,10 @@ SOURCE=.\SetParseDlg.cpp
 SOURCE=.\StdAfx.cpp
 # ADD CPP /Yc"stdafx.h"
 # End Source File
+# Begin Source File
+
+SOURCE=.\zip.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -205,6 +209,10 @@ SOURCE=.\StdAfx.h
 # Begin Source File
 
 SOURCE=.\struct.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\zip.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"

@@ -15,11 +15,11 @@ Class3=CAboutDlg
 ResourceCount=6
 Resource1=IDD_RADARUI_DIALOG
 Resource2=IDR_MAINFRAME
-Resource3=IDD_ABOUTBOX
-Resource4=IDD_PEIZHI
+Resource3=IDD_CHAKAN
+Resource4=IDD_ABOUTBOX
 Class4=CPeizDlg
 Class5=CChakDlg
-Resource5=IDD_CHAKAN
+Resource5=IDD_PEIZHI
 Class6=CSetParseDlg
 Resource6=IDD_DIALOG_ALG_MORE_DETECT
 

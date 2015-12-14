@@ -10,6 +10,8 @@
 #include "PeizDlg.h"
 #include "Coordinate.h"
 #include "math.h"
+#include "iostream.h"
+#include "Windows.h"
 //     #include <Afxsock.h>
 #include "io.h"
 #include "SetParseDlg.h"
@@ -27,6 +29,11 @@ int sendflag;
 // CPeizDlg dialog
 unsigned char g_config[100];
 PLCControllor plcControllor;
+/*导轨控制*/
+int storeID[MAX_STORE_NUM] = {0};
+UINT startPos[MAX_STORE_NUM] = {0};
+UINT endPos[MAX_STORE_NUM] = {0};
+int pnum=0;
 typedef struct _RECVPARAM
 {
 	SOCKET sock;
@@ -80,15 +87,17 @@ CString CRadarEnumMap::m_appErrorArray[10]={"成功"
 BOOL CPeizDlg::OnInitDialog() 
 {
 	CDialog::OnInitDialog();
-	m_port=9008;
-	m_port1=9008;
+	m_port=GetPrivateProfileInt("LidarIp","LidarPort1",0,".\\LidarConfig.ini"); 
+	m_port1=GetPrivateProfileInt("LidarIp","LidarPort2",0,".\\LidarConfig.ini"); 
     UpdateData(FALSE); 
-	CString strip="10.8.5.23";
-	CString strip1="10.8.5.24";
+	char strip[16];
+	GetPrivateProfileString("LidarIp","LidarIP1","", strip,sizeof(strip), ".\\LidarConfig.ini");
+	char strip1[16];
+	GetPrivateProfileString("LidarIp","LidarIP2","", strip1,sizeof(strip1), ".\\LidarConfig.ini");
 
-	CString savepath="C:\\Radar2\\data.txt";
+	CString savepath="C:\\data.txt"; //文件路径
 	SetDlgItemText(IDC_IPADDRESS,strip);
-    SetDlgItemText(IDC_SavaPath,savepath);
+    SetDlgItemText(IDC_SavaPath,"c:\\Radar.zip");
 	SetDlgItemText(IDC_IPADDRESS1,strip1);
     FitNum=1;								//符合时间差的帧数
 	LoadDataNum=1;							//雷达数据帧计数
@@ -96,6 +105,8 @@ BOOL CPeizDlg::OnInitDialog()
 	stop=-1;								//初始化停止指令
 	tagBufferNumber=0;
 	findStartTag=0;
+	revflag=0;
+	resendnum=0;
 	OnButtonStartradar();
 	return TRUE; 
 }
@@ -120,6 +131,7 @@ void CPeizDlg::OnSetRes()
 
 DWORD   WINAPI mythread(LPVOID   lParam);
 DWORD   WINAPI mythread1(LPVOID   lParam);
+DWORD   WINAPI mythread2(LPVOID   lParam);
 
 //int TTT；
 void CPeizDlg::StartRadar() 
@@ -192,6 +204,11 @@ void CPeizDlg::StartRail()
 		}
 	}
 }
+void CPeizDlg::RestartRail() 
+{
+	/*导轨控制*/
+	plcControllor.ScanStorage(pnum,storeID,startPos,endPos);
+}
 void CPeizDlg::InitStartRadar() 
 {
 	//    DetailedConfigInfo Configres;
@@ -221,6 +238,7 @@ void CPeizDlg::InitStartRadar()
     GetDlgItemText(IDC_SavaPath,SavePath);		//读取对话框数据保存地址
 recv:
 	m_strCurInfo="正在连接雷达";
+
 	AddData1();
 	ret1=app.StartRadar(1,SavePath,ip1,port1);
 	ret2=app.StartRadar(2,SavePath,ip2,port2);
@@ -246,7 +264,7 @@ recv:
 	}
 	else if(ret1==-2||ret2==-2)
 	{
-		m_strCurInfo="建立保存数据的文件夹D:\\Radar";
+		m_strCurInfo="建立保存数据的文件夹c:\\Radar.zip"; //modify：D:\\Radar-->C:\\Radar.zip
 		AddData1();
 			Sleep(1000);
 		goto recv;
@@ -266,8 +284,9 @@ recv:
 	int  length=0;
 	int flag=0;
 	CString DataNum,Fnum;
-    stop=2;//避开启动时变量即为关闭值-1；
+    stop=2;										//避开启动时变量即为关闭值-1；
 	Alg->jianditu=1;
+
 	while(1)
 	{
 	  redata:
@@ -280,6 +299,7 @@ recv:
 			m_strCurInfo="雷达"+ip2+"读取数据出错，重启雷达";
 			AddData1();
 			Sleep(20);
+			//closesocket(m_socket_radar2);
 			goto redata;
 		}
 		else if(pData1->time.nMilliseconds<0)
@@ -287,6 +307,7 @@ recv:
 			m_strCurInfo="雷达"+ip1+"读取数据出错，重启雷达";
 			AddData1();
 			Sleep(20);
+			//closesocket(m_socket_radar1);
 			goto redata;
 		}
 		
@@ -297,7 +318,7 @@ recv:
 			LoadDataNum1--;
 			goto redata;
 		}
-
+		
 		length=0;
 		/*******************计算时间差***************************/
 		int result=((pData2->time.nHour-pData1->time.nHour)*3600
@@ -310,12 +331,12 @@ recv:
 			result=255;
 		/*******************计算时间差***************************/
 		
-		if(result<20)
-		{  
+		if(result<20)			
+		{
 			pData->dataLength=pData1->dataLength+pData2->dataLength; 
 			pData->startAngle=pData1->startAngle;
 			pData->stopAngle=pData1->stopAngle;
-            pData->time.nYear= pData1->time.nYear;
+			pData->time.nYear= pData1->time.nYear;
 			pData->time.nMonth= pData1->time.nMonth;
 			pData->time.nDay= pData1->time.nDay;
 			pData->time.nDayOfWeek= pData1->time.nDayOfWeek;
@@ -335,7 +356,7 @@ recv:
 					m_nCurID=0;
 					m_storeNum=m_savNum;
 					m_savState=1;
-
+					
 					//发送开始扫描库位消息
 					mbuf[0]=0xdf;
 					mbuf[1]=0xdf;
@@ -348,8 +369,8 @@ recv:
 					mbuf[8]=CheckFrmSum(mbuf);
 					lenpet=mbuf[5]+mbuf[6]*256;
 					for(int i=0;i<Client_num;i++)
-					k=send(Client[i],mbuf,lenpet,0);
-
+						k=send(Client[i],mbuf,lenpet,0);
+					
 					GetLocalTime(&startime);
 					initime.nYear=startime.wYear;
 					initime.nMonth=startime.wMonth;
@@ -364,27 +385,45 @@ recv:
 				buf[length]='\0';
 			}
 		}
-		  	
+ 	
 		DataNum.Format("%ld",m_nCurID);
 	    m_strCurInfo=DataNum+"帧数据";
 		AddData1();	
 		
 		if(m_sndFlag==1)
 		{    
-			//发送开始算法处理命令
-			buf[0]=0xdf;
-			buf[1]=0xdf;
-			buf[2]=0xdf;
-			buf[3]=0xdf;
-			buf[4]=0x02;
-			buf[5]=0x08;
-			buf[6]=0x00;
-			buf[7]=0x0a;
-		
-			lenpet=buf[5]+buf[6]*256;
-			for(int i=0;i<Client_num;i++)
-			k=send(Client[i],buf,lenpet,0);
-			m_sndFlag=0;
+			if (m_nCurID>=1000)
+			{
+				//发送开始算法处理命令
+				buf[0]=0xdf;
+				buf[1]=0xdf;
+				buf[2]=0xdf;
+				buf[3]=0xdf;
+				buf[4]=0x02;
+				buf[5]=0x08;
+				buf[6]=0x00;
+				buf[7]=0x0a;
+			
+				lenpet=buf[5]+buf[6]*256;
+				for(int i=0;i<Client_num;i++)
+				k=send(Client[i],buf,lenpet,0);
+				WriteLog("发送开始算法处理指令.\n");
+				revflag=0;
+				resendnum=0;
+				m_sndFlag=0;
+			}
+			else
+			{
+				revflag=0;
+				resendnum=0;
+				m_sndFlag=0;
+				m_nCurID=0;
+
+				HANDLE handle;
+				DWORD nThreadId=0;
+				handle=CreateThread(NULL,0,mythread2,(LPVOID)this,0,&nThreadId);
+				CloseHandle(handle);
+			}
 		}
 		
 		if(stop==1)
@@ -408,6 +447,13 @@ DWORD   WINAPI mythread1(LPVOID   lParam)
 {
 	CPeizDlg *pMyClass=(CPeizDlg *)lParam; 
 	pMyClass->StartRail();
+	return 0;
+}
+
+DWORD   WINAPI mythread2(LPVOID   lParam)
+{
+	CPeizDlg *pMyClass=(CPeizDlg *)lParam; 
+	pMyClass->RestartRail();
 	return 0;
 }
 
@@ -645,18 +691,15 @@ bool CPeizDlg::ProcessData(char * recvBuf,int size,RailDataFrame * pData,unsigne
 				lenpet=buf[5]+buf[6]*256;
 				for(int i=0;i<Client_num;i++)
 				k=send(Client[i],buf,lenpet,0);
-
-				/*导轨控制*/
-				int storeID[MAX_STORE_NUM] = {0};
-				UINT startPos[MAX_STORE_NUM] = {0};
-				UINT endPos[MAX_STORE_NUM] = {0};
-				for (i = 0;i<pData->num;i++)
+				
+				pnum=pData->num;
+				for (i = 0;i<pnum;i++)
 				{
 					storeID[i] = pData->strdata[i].storeno;
 					startPos[i] = pData->strdata[i].startpos;
 					endPos[i] = pData->strdata[i].endpos;
 				}
-				plcControllor.ScanStorage((int)pData->num,storeID,startPos,endPos);
+				plcControllor.ScanStorage(pnum,storeID,startPos,endPos);
 			}
 		}
 	}
@@ -730,14 +773,21 @@ bool CPeizDlg::LoadData(RailDataFrame *pdata)
 		ClearRawData();//装载一次，就必须清空原始数据缓存
 		return false;
 	}
-
-	pdata->num=m_rawDataBuff[3];   //待扫描库位数	
-	while(j<pdata->num)//要去掉最后一个字节checksum和三个字节结束标志
+	if (m_rawDataBuff[0]==1)
 	{
-		pdata->strdata[j].storeno=m_rawDataBuff[4+9*j];
-		pdata->strdata[j].startpos=m_rawDataBuff[5+9*j]+m_rawDataBuff[6+9*j]*pow(2,8)+m_rawDataBuff[7+9*j]*pow(2,16)+m_rawDataBuff[8+9*j]*pow(2,24);
-		pdata->strdata[j].endpos=m_rawDataBuff[9+9*j]+m_rawDataBuff[10+9*j]*pow(2,8)+m_rawDataBuff[11+9*j]*pow(2,16)+m_rawDataBuff[12+9*j]*pow(2,24);
-		j++;
+		pdata->num=m_rawDataBuff[3];   //待扫描库位数	
+		while(j<pdata->num)//要去掉最后一个字节checksum和三个字节结束标志
+		{
+			pdata->strdata[j].storeno=m_rawDataBuff[4+9*j];
+			pdata->strdata[j].startpos=m_rawDataBuff[5+9*j]+m_rawDataBuff[6+9*j]*pow(2,8)+m_rawDataBuff[7+9*j]*pow(2,16)+m_rawDataBuff[8+9*j]*pow(2,24);
+			pdata->strdata[j].endpos=m_rawDataBuff[9+9*j]+m_rawDataBuff[10+9*j]*pow(2,8)+m_rawDataBuff[11+9*j]*pow(2,16)+m_rawDataBuff[12+9*j]*pow(2,24);
+			j++;
+		}
+	}
+	else if (m_rawDataBuff[0]==2)
+	{
+		revflag=1;
+		WriteLog("收到开始算法处理指令应答.\n");
 	}
 	ClearRawData();
 	return true;
@@ -778,3 +828,18 @@ unsigned char CPeizDlg::CheckFrmSum(char buf[9])
 	}
 	return tag;
 }
+
+void CPeizDlg:: WriteLog(const char* format, ... )
+{
+	
+    va_list    valist;
+    FILE *fp;
+	
+    fp=fopen("test.log", "a" );	
+    va_start( valist, format );
+    vfprintf( fp, format, valist );
+    va_end( valist );
+    fclose(fp);
+}
+
+

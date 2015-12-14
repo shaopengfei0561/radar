@@ -4,18 +4,6 @@
 #define _RADARSTRUCT_H_
 #define ERRDIS 0
 
-#define RX 17000
-#define LX 1000
-#define LZ 0
-#define HZ 3000
-
-/*
-#define RX 2100
-#define LX 0
-#define LZ 0
-#define HZ 1600
-*/
-
 #define MAX_STORE_NUM 30
 //系统时间结构体
 typedef struct _SYSTIME
