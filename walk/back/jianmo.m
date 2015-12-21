@@ -1,9 +1,11 @@
 function jianmo(p,t,sj)
 global toprestore;
+A1=evalin('base','toprestore');
 global hObject1 handles1;
 guidata(hObject1,handles1);
 global showEnable;
-
+%A2=evalin('base','showEnable');
+startmatlabpool(2);%启动并行计算环境
 if(showEnable)
   %% plot of the current point cloud
   axes(handles1.axes2);
@@ -25,7 +27,8 @@ end
 row=find(abs(t(:,1))+abs(t(:,2))+abs(t(:,3))>0);
 t=t(row,:);
 %% plot of the oyput triangulation
-fname=strcat('c:\web\resources\',num2str(toprestore(sj)*2-1),'.jpg');
+spmd 
+fname=strcat('c:\web\resources\',num2str(A1(sj)*2-1),'.jpg');
 % fname=strcat('d:\radar\output\',num2str(toprestore(sj)*2-1),'.jpg');
 h_fig = figure;
 set(h_fig,'visible','off');
@@ -38,16 +41,17 @@ camlight left;
 lighting phong;
 saveas(h_fig, fname);
 
-fname=strcat('c:\web\resources\',num2str(toprestore(sj)*2),'.jpg');
+fname=strcat('c:\web\resources\',num2str(A1(sj)*2),'.jpg');
 % fname=strcat('d:\radar\output\',num2str(toprestore(sj)*2),'.jpg');
 view([-120 30]);
 saveas(h_fig, fname);
 disp('genGif3D');
 tic;
 
-genGif3D(1,num2str(toprestore(sj)*2),h_fig); % 生成GIF动画
+genGif3D(1,num2str(A1(sj)*2),h_fig); % 生成GIF动画
 %close(h_fig);               %关闭figure，清空内存
 toc;
+end
 if(showEnable)
   axes(handles1.axes3);
   trisurf(t,p(:,1),p(:,2),p(:,3),'facecolor','c','edgecolor','b'); %plot della superficie trattata
@@ -58,3 +62,4 @@ if(showEnable)
   camlight left;
   lighting phong;
 end
+matlabpool close;%终止并行计算环境
