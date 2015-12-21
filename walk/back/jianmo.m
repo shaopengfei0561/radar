@@ -1,11 +1,11 @@
 function jianmo(p,t,sj)
 global toprestore;
-A1=evalin('base','toprestore');
+A1=evalin('base','toprestore');  %spmd中不可有全局变量
 global hObject1 handles1;
 guidata(hObject1,handles1);
 global showEnable;
 %A2=evalin('base','showEnable');
-startmatlabpool(2);%启动并行计算环境
+startmatlabpool(2);   %启动并行计算环境
 if(showEnable)
   %% plot of the current point cloud
   axes(handles1.axes2);
@@ -27,7 +27,7 @@ end
 row=find(abs(t(:,1))+abs(t(:,2))+abs(t(:,3))>0);
 t=t(row,:);
 %% plot of the oyput triangulation
-spmd 
+spmd   %任务并行计算
 fname=strcat('c:\web\resources\',num2str(A1(sj)*2-1),'.jpg');
 % fname=strcat('d:\radar\output\',num2str(toprestore(sj)*2-1),'.jpg');
 h_fig = figure;

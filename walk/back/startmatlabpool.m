@@ -1,3 +1,4 @@
+%启动并行计算环境
 function [] = startmatlabpool(size)
 %function [] = startmatlabpool(size)
 isstart = 0;
